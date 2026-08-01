@@ -1,6 +1,7 @@
 import React from "react";
+import "./Listing.css"
 
-interface Item {
+export interface Item {
   listing_id: number;
   url: string;
   MainImage: string;
@@ -10,7 +11,7 @@ interface Item {
   quantity: number;
 }
 
-interface ListingsProps {
+export interface ListingsProps {
   items: Item[];
 }
 

@@ -1,9 +1,21 @@
-import React from 'react';
 import './App.css';
 import { Listings } from './components/Listing/Listing';
 import rawData from './components/data/data.json'
 
-function extractItem(raw) {
+interface RawItem {
+  state?: string;
+  listing_id?: number;
+  url?: string;
+  MainImage?: {
+    url_570xN?:string;
+  };
+  title?: string;
+  currency_code?: string;
+  price?: string;
+  quantity?: number;
+}
+
+function extractItem(raw: RawItem) {
   return {
     listing_id: raw.listing_id,
     url: raw.url,
@@ -15,11 +27,13 @@ function extractItem(raw) {
   };
 }
 
-const items = rawData.map(extractItem)
+const items = rawData
+  .filter((raw: any) => raw.state !== "removed")
+  .map(extractItem)
 
 function App() {
   return (
-    <div className="app">
+    <div className="container">
       <Listings items={items}/>
     </div>
   );
